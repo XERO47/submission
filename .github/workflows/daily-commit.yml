@@ -1,50 +1,50 @@
-# A descriptive name for your workflow, which appears in the Actions tab
-name: Daily Automated Commit
+# # A descriptive name for your workflow, which appears in the Actions tab
+# name: Daily Automated Commit
 
-# This section defines the triggers for the workflow
-on:
-  # This allows you to run the workflow manually from the Actions tab
-  workflow_dispatch:
+# # This section defines the triggers for the workflow
+# on:
+#   # This allows you to run the workflow manually from the Actions tab
+#   workflow_dispatch:
 
-  # This sets up the schedule
-  schedule:
-    # This is a CRON string. It means "run at 7:00 AM UTC every day".
-    # The requirement is to use a specific time, not wildcards for hour/minute.
-    - cron: '0 7 * * *'
+#   # This sets up the schedule
+#   schedule:
+#     # This is a CRON string. It means "run at 7:00 AM UTC every day".
+#     # The requirement is to use a specific time, not wildcards for hour/minute.
+#     - cron: '0 7 * * *'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # We'll define a single job named 'commit-job'
-  commit-job:
-    # The type of machine to run the job on. 'ubuntu-latest' is common and cost-effective.
-    runs-on: ubuntu-latest
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # We'll define a single job named 'commit-job'
+#   commit-job:
+#     # The type of machine to run the job on. 'ubuntu-latest' is common and cost-effective.
+#     runs-on: ubuntu-latest
 
-    # A job is a sequence of steps
-    steps:
-      # Step 1: Check out your repository's code
-      # The 'uses' keyword tells the job to retrieve a pre-built action.
-      # actions/checkout@v4 is the standard action for checking out your code.
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+#     # A job is a sequence of steps
+#     steps:
+#       # Step 1: Check out your repository's code
+#       # The 'uses' keyword tells the job to retrieve a pre-built action.
+#       # actions/checkout@v4 is the standard action for checking out your code.
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
 
-      # Step 2: Create a file, commit, and push it
-      # The 'name' of this step fulfills the email requirement.
-      - name: Create commit and push - 23f2004264@ds.study.iitm.ac.in
-        # The 'run' keyword executes command-line commands on the runner.
-        run: |
-          # Configure git with a user name and email for the commit
-          git config --global user.name "DevSync Bot"
-          git config --global user.email "bot@devsync.com"
+#       # Step 2: Create a file, commit, and push it
+#       # The 'name' of this step fulfills the email requirement.
+#       - name: Create commit and push - 23f2004264@ds.study.iitm.ac.in
+#         # The 'run' keyword executes command-line commands on the runner.
+#         run: |
+#           # Configure git with a user name and email for the commit
+#           git config --global user.name "DevSync Bot"
+#           git config --global user.email "bot@devsync.com"
 
-          # Create or update a file to ensure there's a change to commit.
-          # Appending the current date and time makes the file content unique for each run.
-          echo "Last update executed on: $(date)" > last_update.txt
+#           # Create or update a file to ensure there's a change to commit.
+#           # Appending the current date and time makes the file content unique for each run.
+#           echo "Last update executed on: $(date)" > last_update.txt
 
-          # Stage the new/changed file
-          git add last_update.txt
+#           # Stage the new/changed file
+#           git add last_update.txt
 
-          # Commit the file with a descriptive message
-          git commit -m "Automated Daily Update: $(date)"
+#           # Commit the file with a descriptive message
+#           git commit -m "Automated Daily Update: $(date)"
 
-          # Push the commit back to the main branch of your repository
-          git push
+#           # Push the commit back to the main branch of your repository
+#           git push
